@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\RecruiterPrivilege;
+use App\Model\Privilege;
 use Faker\Generator as Faker;
 
-$factory->define(RecruiterPrivilege::class, function (Faker $faker) {
+$factory->define(Model::class, function (Faker $faker) {
     return [
         //
     ];

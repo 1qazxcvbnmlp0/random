@@ -15,8 +15,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    // 'first_name', 'last_name'
     protected $fillable = [
-        'name', 'email', 'password', 'phone_number', 'phone_verified_at', 'role', 'isActive'
+       'name' , 'email', 'password', 'phone_number', 'phone_verified_at', 'profile_picture', 'status', 'sex', 'birthdate', 'deleted_at'
     ];
 
     /**
@@ -37,11 +38,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function role(){
-    //     return $this->belongsToMany(\App\Role::class, 'users_roles'); 
-    // }
+    public function role(){
+        return $this->belongsToMany(\App\Model\Role::class); 
+    }
 
-    // public function privilege(){
-    //     return $this->belongsToMany(\App\Privilege::class); 
-    // }
+    public function privilege(){
+        return $this->belongsToMany(\App\Model\Privilege::class); 
+    }
+
+    
 }
