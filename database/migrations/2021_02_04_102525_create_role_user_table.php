@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecruiterPrivilegesTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateRecruiterPrivilegesTable extends Migration
      */
     public function up()
     {
-        Schema::create('recruiter_privileges', function (Blueprint $table) {
+        Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->bigInteger('user_id');
+            $table->bigInteger('role_id');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateRecruiterPrivilegesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recruiter_privileges');
+        Schema::dropIfExists('role_user');
     }
 }
