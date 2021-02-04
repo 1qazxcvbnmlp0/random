@@ -46,5 +46,60 @@ class User extends Authenticatable
         return $this->belongsToMany(\App\Model\Privilege::class); 
     }
 
+    public function isAdmin(){
+        if($this->role->id == 1){
+            return true; 
+        }
+        return false; 
+    }
+
+    public function isCompanyAgent(){
+        if($this->role->id == 2){
+            return true; 
+        }
+        return false; 
+    }
+
+    /*
+        --------------------------------------------- Begin ------------------------------------------------------ 
+        Use this code directly on the front end, not to display some section of codes. To allow company agents to view that page
+    */ 
+
+    public function isSuperAdmin(){
+        if($this->privilege->id == 1 ){
+            return true; 
+        }
+        return false; 
+    }
+
+    public function isHeadRecruiter(){
+        if($this->privilege->id == 2 ){
+            return true; 
+        }
+        return false; 
+    }
+
+    public function isRecruiter(){
+        if($this->privilege->id == 3 ){
+            return true; 
+        }
+        return false; 
+    }
+
+    public function isBrandingPageAdmin(){
+        if($this->privilege->id == 4 ){
+            return true; 
+        }
+        return false; 
+    }
+
+     /*
+        --------------------------------------------- Begin ------------------------------------------------------ 
+        Use this code directly on the front end, not to display some section of codes. To allow company agents to view that page
+    */ 
+
+  
+
+
     
 }
