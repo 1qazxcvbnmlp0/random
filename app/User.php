@@ -38,63 +38,82 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
+    public function roles(){
         return $this->belongsToMany(\App\Model\Role::class); 
     }
 
-    public function privilege(){
+    public function privileges(){
         return $this->belongsToMany(\App\Model\Privilege::class); 
     }
 
+
+    // -------------------------------Role Start--------------------------------------------------------------//
+
+    public function user_role(){
+        foreach($this->roles as $role){
+            if($role->id == 1){
+                return 1; //Returning admin, index, which is 1. 
+            }else if ($role->id ==2){
+                return 2; //Returning recruiter index, which is 2.
+            }else{
+                return 3; //Returning applicant index, which is 3. 
+            }
+        }
+    }
+
     public function isAdmin(){
-        if($this->role->id == 1){
+        
+        if($this->user_role() == 1){
             return true; 
         }
         return false; 
     }
 
     public function isCompanyAgent(){
-        if($this->role->id == 2){
+       
+        if($this->user_role() == 2){
             return true; 
         }
         return false; 
     }
+
+    //--------------------------------Role End --------------------------------------------------------------//
 
     /*
         --------------------------------------------- Begin ------------------------------------------------------ 
         Use this code directly on the front end, not to display some section of codes. To allow company agents to view that page
     */ 
 
-    public function isSuperAdmin(){
-        if($this->privilege->id == 1 ){
-            return true; 
-        }
-        return false; 
-    }
+    // public function isSuperAdmin(){
+    //     if($this->privilege->id == 1 ){
+    //         return true; 
+    //     }
+    //     return false; 
+    // }
 
-    public function isHeadRecruiter(){
-        if($this->privilege->id == 2 ){
-            return true; 
-        }
-        return false; 
-    }
+    // public function isHeadRecruiter(){
+    //     if($this->privilege->id == 2 ){
+    //         return true; 
+    //     }
+    //     return false; 
+    // }
 
-    public function isRecruiter(){
-        if($this->privilege->id == 3 ){
-            return true; 
-        }
-        return false; 
-    }
+    // public function isRecruiter(){
+    //     if($this->privilege->id == 3 ){
+    //         return true; 
+    //     }
+    //     return false; 
+    // }
 
-    public function isBrandingPageAdmin(){
-        if($this->privilege->id == 4 ){
-            return true; 
-        }
-        return false; 
-    }
+    // public function isBrandingPageAdmin(){
+    //     if($this->privilege->id == 4 ){
+    //         return true; 
+    //     }
+    //     return false; 
+    // }
 
      /*
-        --------------------------------------------- Begin ------------------------------------------------------ 
+        --------------------------------------------- End ------------------------------------------------------ 
         Use this code directly on the front end, not to display some section of codes. To allow company agents to view that page
     */ 
 
