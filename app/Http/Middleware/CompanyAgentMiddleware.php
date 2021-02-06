@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyAgentMiddleware
 {
@@ -21,7 +22,7 @@ class CompanyAgentMiddleware
             return $next($request);
         }
         // Redirect to applicant page
-        return $next($request);
+        return redirect(route('applicantHome'));
 
     }
 }

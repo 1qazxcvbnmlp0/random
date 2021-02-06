@@ -22,6 +22,6 @@ class AdminMiddleware
             return $next($request);
         }
         // Redirect to Company Agent middleware
-        return $next($request);
+        return redirect(route('recruiterHome'));
     }
 }

@@ -19,7 +19,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+// ------------------------------------- Start Company Registeration routes-----------------------------------------
+
+Route::get('registerCompany', function(){
+    return view('auth\registerCompany');
+})->name('registerCompany');
+
+// ------------------------------------- End Company Registeration routes-----------------------------------------
+
+
+// During login Selectes the type of user, i.e. the role using the following routes/ 
+// -----------------------------------Start Login Routes ----------------------------//
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route for admin
+Route::get('/home', ['middleware'=>['auth', 'admin'], function(){
+    return view('admin');
+}])->name('adminHome');
+
+// Route For recruiter
+Route::get('/companyHome', ['middleware'=>['auth', 'companyAgent'], function(){
+    return view('recruiter');
+}])->name('recruiterHome');
+
+// Route for applicant
+Route::get('/applicantHome', ['middleware'=>['auth'], function(){
+    return view('applicant');
+}])->name('applicantHome');
+
+//-----------------------------------End Login routes-----------------------------//
 
 
 //Email Verification Starts here
