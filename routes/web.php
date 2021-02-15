@@ -52,6 +52,14 @@ Route::get('/applicantHome', ['middleware'=>['auth'], function(){
 //-----------------------------------End Login routes-----------------------------//
 
 
+//----------------------------------- Start Job routes-----------------------------//
+
+Route::get('/job', function(){
+    return view('job_index');
+});
+
+//----------------------------------- End Job routes-----------------------------//
+
 //Email Verification Starts here
 
 /*
