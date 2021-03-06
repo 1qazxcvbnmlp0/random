@@ -43,7 +43,11 @@ class User extends Authenticatable
     }
 
     public function privileges(){
-        return $this->belongsToMany(\App\Model\Privilege::class); 
+        return $this->belongsToMany(\App\Model\Privilege::class, 'company_agents', 'user_id', 'privilege_id'); 
+    }
+
+    public function agentPrivilege(){
+        return $this->belongsToMany(\App\Model\Privilege::class, 'company_agents', 'user_id', 'privilege_id');
     }
 
 
@@ -75,6 +79,26 @@ class User extends Authenticatable
             return true; 
         }
         return false; 
+    }
+
+    public function company(){
+        return $this->belongsTo(\App\Model\Company::class,'id', 'super_admin_id');
+        // return $this->belongsTo('\App\Model\Company', 'super_admin_id', 'id');
+    }
+
+/*
+fix this, agent belongs to company
+    public function agentBelongsTo(){
+        return $this->belongsTo(\App\Model\PrivilegeUser::class, 'company_id');
+    }
+*/
+
+    public function recruitingManagerForJobs(){
+        return $this->belongsTo(\App\Model\Job::class, 'id', 'recruiting_manager_id');
+    }
+
+    public function recruiterForJobs(){
+            return $this->belongsToMany(\App\Model\Job::class, 'job_recruiter', 'job_id', 'recruiter_id');
     }
 
     //--------------------------------Role End --------------------------------------------------------------//

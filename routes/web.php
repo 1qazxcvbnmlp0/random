@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserProfileController;
+// use App\Http\Controllers\CompanyController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,9 @@ Auth::routes();
 
 Route::get('registerCompany', function(){
     return view('auth\registerCompany');
-})->name('registerCompany');
+})->name('registerCompany')->middleware('guest');
+
+Route::resource('setupCompanyProfile', CompanyController::class);
 
 // ------------------------------------- End Company Registeration routes-----------------------------------------
 
@@ -41,7 +45,7 @@ Route::get('/home', ['middleware'=>['auth', 'admin'], function(){
 
 // Route For recruiter
 Route::get('/companyHome', ['middleware'=>['auth', 'companyAgent'], function(){
-    return view('recruiter');
+    return view('recruiter/job_index');
 }])->name('recruiterHome');
 
 // Route for applicant
@@ -54,9 +58,7 @@ Route::get('/applicantHome', ['middleware'=>['auth'], function(){
 
 //----------------------------------- Start Job routes-----------------------------//
 
-Route::get('/job', function(){
-    return view('job_index');
-});
+Route::resource('/job',CompanyCreateJob::class)->middleware(['auth', 'companyAgent']);
 
 //----------------------------------- End Job routes-----------------------------//
 
