@@ -10,7 +10,9 @@
 
                 <div class="card-body">
                    
-                   <a href="{{route('job.create')}}">Create Job</a>
+                   <a class="btn btn-success" href="{{route('job.create')}}">Create Job</a>
+                   <a class="btn btn-secondary" href="{{route('job.index')}}">View Jobs</a>
+                   <a class="btn btn-primary" href="{{route('setupCompanyProfile.index')}}">Setup Company Profile</a>
                    
                 </div>
 
