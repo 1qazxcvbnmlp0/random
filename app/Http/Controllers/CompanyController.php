@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Model\Company; 
-use App\Model\PrivilegeUser; 
+use App\Model\CompanyAgent; 
 
 class CompanyController extends Controller
 {
@@ -16,6 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
+        // return Company::all();
         //
         return view('recruiter/setup_company_profile');
     }
@@ -47,7 +48,7 @@ class CompanyController extends Controller
             'super_admin_id'=>Auth::user()->id, 
         ]);
         
-        PrivilegeUser::create([
+        CompanyAgent::create([
             'user_id'=>Auth::user()->id,
             'company_id'=>$company->id,
             'privilege_id'=>1
