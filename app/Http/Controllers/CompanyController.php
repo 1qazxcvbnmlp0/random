@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Model\Company; 
 use App\Model\CompanyAgent; 
+use App\Http\Resources\Api\Company\CompanyResource;
 
 class CompanyController extends Controller
 {
@@ -16,9 +17,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        // return Company::all();
-        //
-        return view('recruiter/setup_company_profile');
+        return CompanyResource::collection(Company::paginate(20));
+        
+        // return view('recruiter/setup_company_profile');
     }
 
     /**
@@ -39,21 +40,68 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+
+     /*
+     
+     For web use only
+
         $company=Company::create([
             
             'company_name'=>$request->company_name,
             'industry_type'=>$request->industry_type,
             'super_admin_id'=>Auth::user()->id, 
+            // 'super_admin_id'=>$request->data["id"], 
         ]);
         
-        CompanyAgent::create([
+        $companyAgent=CompanyAgent::create([
             'user_id'=>Auth::user()->id,
+            // 'user_id'=>$request->data["id"], 
             'company_id'=>$company->id,
             'privilege_id'=>1
         ]);
+
         return redirect('home');
+     
+     */
+
+        
+        
+        
+        // For Api purpose only
+
+
+         // // return $request; 
+        $company=Company::create([
+            
+            'company_name'=>$request->data["company_name"],
+            'industry_type'=>$request->data["industry_type"],
+            // 'super_admin_id'=>Auth::user()->id, 
+            'super_admin_id'=>$request->data["id"], 
+        ]);
+        
+        $companyAgent=CompanyAgent::create([
+            // 'user_id'=>Auth::user()->id,
+            'user_id'=>$request->data["id"], 
+            'company_id'=>$company->id,
+            'privilege_id'=>1
+        ]);
+
+        // return [
+        //     'company' => $company,
+        //     'company agent'=>$companyAgent
+        // ];
+            
+        return [
+            "data"=>[
+            'company' => $company,
+            'company agent'=>$companyAgent
+            ]
+        ];
+
+        
+       
+        
+        
     }
 
     /**
@@ -65,6 +113,13 @@ class CompanyController extends Controller
     public function show($id)
     {
         //
+        return new CompanyResource(Company::find($id));
+        // $company= Company::find($id);
+        // if($company){
+        //     return $company;
+        // }
+
+        // return "Could not found what you are searching for. ";
     }
 
     /**

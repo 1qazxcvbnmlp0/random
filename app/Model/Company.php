@@ -15,18 +15,16 @@ class Company extends Model
         'super_admin_id',
     ];
 
+
+    public function companyAgent(){
+        return $this->hasMany(\App\Model\CompanyAgent::class); 
+    }
+
     public function superAdmin(){
         // The super admin email and password, all the other informations are inside the Users table. 
         return $this->hasOne(\App\User::class, 'id' , 'super_admin_id');
     }
 
-    public function agentPrivilege(){
-        return $this->belongsToMany(\App\Model\Privilege::class, 'company_agents', 'company_id', 'privilege_id');
-    }
-
-    public function agents(){
-        return $this->belongsToMany(\App\User::class, 'company_agents', 'company_id', 'user_id');
-    }
 
     public function jobs(){
         return $this->hasMany(\App\Model\Job::class, 'company_id', 'id'); 
