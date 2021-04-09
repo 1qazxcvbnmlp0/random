@@ -15,9 +15,9 @@ class CompanyResourceCollection extends JsonResource
     public function toArray($request)
     {
         return [
-            'Company name'=>$this->company_name,
-            'Industry type'=>$this->industry_type,
-            'Company Representative'=>$this->superAdmin->name,
+            'company_name'=>$this->company_name,
+            'industry_type'=>$this->industry_type,
+            'company_representative'=>$this->superAdmin->name,
             'href' => [
                 'detail'=>route('info.show', $this->id),
             ]

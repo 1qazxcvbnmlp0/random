@@ -18,10 +18,10 @@ class CompanyResource extends JsonResource
 
        
         return [
-            'Company name'=>$this->company_name,
-            'Industry type'=>$this->industry_type,
-            'Company Representative'=>$this->superAdmin->name,
-            'Agents'=>AgentCollection::collection($this->companyAgent),
+            'company_name'=>$this->company_name,
+            'industry_type'=>$this->industry_type,
+            'company_representative'=>$this->superAdmin->name,
+            'agents'=>AgentCollection::collection($this->companyAgent),
             'href' => [
                 'detail'=>"No links provided",
                 'jobs'=>route('jobs.index', $this->id),

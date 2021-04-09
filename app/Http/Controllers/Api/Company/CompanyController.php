@@ -19,7 +19,7 @@ class CompanyController extends Controller
     {
         //
         
-        return CompanyResourceCollection::collection(Company::all());
+        return CompanyResourceCollection::collection(Company::paginate(10));
     }
 
     /**
@@ -41,6 +41,14 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //
+        $company=Company::create([
+            'company_name' => $request->company_name,
+            'industry_type'=> $request->industry_type,
+            'super_admin_id'=>$request->company_representative, 
+            //This area has to be automatically filled by the system. During authentication
+        ]);
+        return $company; 
+        
     }
 
     /**
@@ -76,6 +84,12 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $update=Company::where('id', $id)->update([
+            'company_name' => $request->company_name,
+            'industry_type'=> $request->industry_type,
+            'super_admin_id'=>$request->company_representative, 
+        ]);
+        return "Company Updated"; 
     }
 
     /**
@@ -87,5 +101,7 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+        $delete=Company::find($id)->delete();
+        return "Company deleted successfully"; 
     }
 }
