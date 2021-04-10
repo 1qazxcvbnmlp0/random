@@ -38,17 +38,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function companyAgent(){
+        return $this->hasMany(\App\Model\CompanyAgent::class); 
+    }
+
     public function roles(){
         return $this->belongsToMany(\App\Model\Role::class); 
     }
 
-    public function privileges(){
-        return $this->belongsToMany(\App\Model\Privilege::class, 'company_agents', 'user_id', 'privilege_id'); 
-    }
-
-    public function agentPrivilege(){
-        return $this->belongsToMany(\App\Model\Privilege::class, 'company_agents', 'user_id', 'privilege_id');
-    }
 
 
     // -------------------------------Role Start--------------------------------------------------------------//

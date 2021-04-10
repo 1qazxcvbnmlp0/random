@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Privilege extends Model
 {
     //
+    protected $fillable=[
+        'name'
+    ];
 
-
-    public function user(){
-        return $this->belongsToMany(\App\User::class, 'company_agents', 'privilege_id', 'user_id'); 
+    public function companyAgent(){
+        return $this->hasMany(\App\Model\CompanyAgent::class); 
     }
 }

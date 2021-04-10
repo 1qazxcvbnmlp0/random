@@ -15,6 +15,8 @@ use App\Http\Controllers\UserProfileController;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,8 +35,8 @@ Route::resource('setupCompanyProfile', CompanyController::class);
 // ------------------------------------- End Company Registeration routes-----------------------------------------
 
 
-// During login Selectes the type of user, i.e. the role using the following routes/ 
-// -----------------------------------Start Login Routes ----------------------------//
+// // During login Selectes the type of user, i.e. the role using the following routes/ 
+// // -----------------------------------Start Login Routes ----------------------------//
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -53,14 +55,14 @@ Route::get('/applicantHome', ['middleware'=>['auth'], function(){
     return view('applicant');
 }])->name('applicantHome');
 
-//-----------------------------------End Login routes-----------------------------//
+// //-----------------------------------End Login routes-----------------------------//
 
 
-//----------------------------------- Start Job routes-----------------------------//
+// //----------------------------------- Start Job routes-----------------------------//
 
 Route::resource('/job',CompanyCreateJob::class)->middleware(['auth', 'companyAgent']);
 
-//----------------------------------- End Job routes-----------------------------//
+// //----------------------------------- End Job routes-----------------------------//
 
 //Email Verification Starts here
 
