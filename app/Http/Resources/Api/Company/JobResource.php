@@ -24,7 +24,7 @@ class JobResource extends JsonResource
             'location'=>$this->location,
             'number_of_candidates'=>$this->head_count,
             'detail'=>$this->description,
-            'education_degree'=>$this->level,
+            'education_degree'=>$this->education_degree->educational_level,
             'field_of_study'=>$this->field_of_study_table->field_name,
             'experience'=>$this->experience,
             'age'=>$this->age,

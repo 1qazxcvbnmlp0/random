@@ -48,4 +48,8 @@ class Job extends Model
     public function field_of_study_table(){
         return $this->belongsTo(FieldOfStudy::class, 'field_of_study');
     }
+
+    public function education_degree(){
+        return $this->belongsTo(\App\Model\Level::Class, 'level');
+    }
 }

@@ -12,4 +12,8 @@ class Level extends Model
     protected $fillable=[
         'educational_level',
     ];
+
+    public function jobs(){
+        return $this->hasMany(\App\Model\Job::class, 'level');
+    }
 }
