@@ -46,6 +46,18 @@ class User extends Authenticatable
         return $this->belongsToMany(\App\Model\Role::class); 
     }
 
+    public function resumes(){
+        return $this->hasMany(\App\Model\Resume::class); 
+    }
+
+    public function coverLetters(){
+        return $this->hasMany(\App\Model\CoverLetter::class);
+    }
+
+    public function appliedJobs(){
+        return $this->hasMany(\App\Model\JobApplicant::class);
+    }
+
 
 
     // -------------------------------Role Start--------------------------------------------------------------//
