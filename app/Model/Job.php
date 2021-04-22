@@ -52,4 +52,8 @@ class Job extends Model
     public function education_degree(){
         return $this->belongsTo(\App\Model\Level::Class, 'level');
     }
+
+    public function applicants(){
+        return $this->hasMany(\App\Model\JobApplicant::class); 
+    }
 }
